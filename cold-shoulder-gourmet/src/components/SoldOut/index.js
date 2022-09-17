@@ -1,21 +1,7 @@
-import { useState, useEffect } from 'react';
-import { getBusinessInfo } from '../../api';
-
-function SoldOut() {
-    const [soldOut, setSoldOut] = useState(false);
-    useEffect(() => {
-        getBusinessInfo();
-    }, [])
-
+function SoldOut({ soldOut }) {
     return (
         <div className="">
             {soldOut ? 'Sold Out' : 'Sandos in Stock'}
-
-            <button
-                onClick={() => { setSoldOut(!soldOut) }}
-            >
-                Update Sold Out
-            </button>
         </div>
     );
 }
