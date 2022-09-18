@@ -1,14 +1,23 @@
+import {Col, Container, Row} from "react-bootstrap";
+
 function Hours({ hours }) {
     return (
-        <div className="">
-            <p>Sunday - {hours.Sunday}</p>
-            <p>Monday - {hours.Monday}</p>
-            <p>Tuesday - {hours.Tuesday}</p>
-            <p>Wednesday - {hours.Wednesday}</p>
-            <p>Thursday - {hours.Thursday}</p>
-            <p>Friday - {hours.Friday}</p>
-            <p>Saturday - {hours.Saturday}</p>
-        </div>
+        <Container fluid style={{fontSize: 20}}>
+            <Row>
+                <Col lg={'auto'}>
+                    <p>Sunday - {hours.Sunday}</p>
+                    <p>Monday - {hours.Monday}</p>
+                    <p>Tuesday - {hours.Tuesday}</p>
+                    <p>Wednesday - {hours.Wednesday}</p>
+                </Col>
+                <Col lg={'auto'}>
+                    <p>Thursday - {hours.Thursday}</p>
+                    <p>Friday - {hours.Friday}</p>
+                    <p>Saturday - {hours.Saturday}</p>
+                </Col>
+            </Row>
+
+        </Container>
     );
 }
 

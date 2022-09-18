@@ -1,7 +1,17 @@
 function SoldOut({ soldOut }) {
     return (
-        <div className="mt-5 mb-3">
-            {soldOut ? 'Sold Out' : 'Sandos in Stock'}
+        <div className="m-auto w-100">
+            <h1 className={"text-center m-5"}>
+                {
+                    soldOut ?
+                    'We are current sold out, check back tomorrow!' :
+                    'Sandos in Stock'
+                }
+            </h1>
+            <h3  style={{fontFamily: "Cedarville Cursive",}} className={"text-center m-5"}>
+                Don't be mad... Be Early
+            </h3>
+
         </div>
     );
 }

@@ -1,9 +1,10 @@
 import { useState, useEffect } from 'react';
-import { getBusinessInfo } from '../../api';
-
-import SoldOut from '../SoldOut';
-import Address from '../Address';
-import Hours from '../Hours';
+import {getBusinessInfo} from "../../api";
+import SoldOut from "../SoldOut";
+import Address from "../Address";
+import Hours from "../Hours";
+import {Col, Container, Row, Spinner} from "react-bootstrap";
+import Gallery from "../Gallery";
 
 
 function Home() {
@@ -24,17 +25,31 @@ function Home() {
                 }
             })
     }, [])
-
     return (
-        <>
-            <div className="Home">
+        <Container fluid>
+            <Gallery />
+            {
+                loading &&
+                <Row className={"h-50 p-5"}>
+                    <Spinner className="m-auto" animation="border" role="status" variant={"light"}>
+                        <span className="visually-hidden">Loading...</span>
+                    </Spinner>
+                </Row>
+            }
+            <Row className={"h-50 p-5"}>
                 {soldOut && <SoldOut soldOut={soldOut} />}
-                {address && < Address address={address} />}
-                {hours && < Hours hours={hours} />}
-                {loading && 'Loading...'}
-            </div>
-        </>
+            </Row>
+            <Row  className={"h-50"}>
+                <Col className={"m-auto p-5"} lg={8}>
+                    {address && < Address address={address} />}
+                </Col>
+                <Col className={"m-auto" }  lg={4}>
+                    {hours && < Hours hours={hours} />}
+                </Col>
+            </Row>
+        </Container>
     );
 }
 
 export default Home;
+

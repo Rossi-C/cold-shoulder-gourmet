@@ -1,8 +1,8 @@
 function Address({ address: { street, city, state, zip } }) {
     return (
         <div className="">
-            <p>{street}</p>
-            <>{city}, {state} {zip}</>
+            <h3>{street}</h3>
+            <h3>{city}, {state} {zip}</h3>
         </div>
     );
 }
