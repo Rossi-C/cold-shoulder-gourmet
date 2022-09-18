@@ -1,36 +1,28 @@
-import './App.css';
-import SoldOut from './components/SoldOut';
-import Address from './components/Address';
-import Hours from './components/Hours';
-import { useState, useEffect } from 'react';
-import { getBusinessInfo } from './api';
+import {router} from "./router";
+import {
+  RouterProvider,
+} from "react-router-dom";
+import Navigation from "./components/Navigation";
+import {Container} from "react-bootstrap";
+import {useEffect} from "react";
+import WebFont from "webfontloader";
+
 
 function App() {
-  const [soldOut, setSoldOut] = useState(false);
-  const [address, setAddress] = useState(null);
-  const [hours, setHours] = useState(null);
-  const [loading, setLoading] = useState(false);
-
-  useEffect(() => {
-    setLoading(true);
-    getBusinessInfo()
-      .then(({ soldOut, address, hours }) => {
-        if (soldOut || address || hours) {
-          setSoldOut(soldOut);
-          setAddress(address);
-          setHours(hours);
-          setLoading(false);
-        }
-      })
-  }, [])
-
+    useEffect(() => {
+        WebFont.load({
+            google: {
+                families: ['Allerta Stencil', "Cedarville Cursive"]
+            }
+        });
+    }, []);
   return (
-    <div className="App">
-      {soldOut && <SoldOut soldOut={soldOut} />}
-      {address && < Address address={address} />}
-      {hours && < Hours hours={hours} />}
-      {loading && 'Loading...'}
-    </div>
+    <Container className="bg-dark px-5 py-2 m-0" style={{minHeight: "100vh", fontFamily:"Allerta Stencil"}} fluid>
+      <Navigation/>
+      <div className="text-light">
+        <RouterProvider router={router}/>
+      </div>
+    </Container>
   );
 }
 
