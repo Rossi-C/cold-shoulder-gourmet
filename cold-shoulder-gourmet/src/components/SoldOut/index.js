@@ -11,6 +11,7 @@ function SoldOut({ soldOut }) {
             <h3  style={{fontFamily: "Cedarville Cursive",}} className={"text-center m-5"}>
                 Don't be mad... Be Early
             </h3>
+
         </div>
     );
 }

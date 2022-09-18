@@ -6,6 +6,7 @@ import Hours from "../Hours";
 import {Col, Container, Row, Spinner} from "react-bootstrap";
 import Gallery from "../Gallery";
 
+
 function Home() {
     const [soldOut, setSoldOut] = useState(false);
     const [address, setAddress] = useState(null);
@@ -51,3 +52,4 @@ function Home() {
 }
 
 export default Home;
+
