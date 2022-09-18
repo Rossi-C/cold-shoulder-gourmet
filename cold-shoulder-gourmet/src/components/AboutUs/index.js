@@ -1,11 +1,11 @@
-import {Carousel, Container, Row} from "react-bootstrap";
+import { Container, Row } from "react-bootstrap";
 import Gallery from "../Gallery";
 
 function AboutUs() {
     return (
         <Container fluid>
             <Gallery />
-            <Row className={"h-50 p-5"} style={{fontSize:25}}>
+            <Row className={"h-50 p-5"} style={{ fontSize: 25 }}>
                 <p>
                     Contrary to popular belief, Lorem Ipsum is not simply random text.
                     It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old.

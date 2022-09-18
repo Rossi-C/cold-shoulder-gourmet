@@ -1,11 +1,9 @@
-import {Container, Nav, Navbar, NavDropdown} from "react-bootstrap";
-import {useEffect} from "react";
-import WebFont from "webfontloader";
+import { Container, Nav, Navbar } from "react-bootstrap";
 
 function Navigation() {
     return (
-        <Navbar style={{fontFamily: "Cedarville Cursive", fontSize: 30}} variant={"dark"}>
-            <Navbar.Brand href="/" style={{fontSize: 35}}>Cold Shoulder Gourmet</Navbar.Brand>
+        <Navbar style={{ fontFamily: "Cedarville Cursive", fontSize: 30 }} variant={"dark"}>
+            <Navbar.Brand href="/" style={{ fontSize: 35 }}>Cold Shoulder Gourmet</Navbar.Brand>
 
             <Container className="px-5 font-weight-bold" fluid>
                 <Nav>
