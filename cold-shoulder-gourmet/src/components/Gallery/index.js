@@ -1,4 +1,4 @@
-import {Carousel, Row} from "react-bootstrap";
+import {Carousel} from "react-bootstrap";
 import Gallery1 from './Gallery1.jpg'
 import Gallery2 from './Gallery2.jpg'
 import Gallery3 from './Gallery3.jpg'

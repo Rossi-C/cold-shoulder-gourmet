@@ -1,6 +1,4 @@
-import {Container, Nav, Navbar, NavDropdown} from "react-bootstrap";
-import {useEffect} from "react";
-import WebFont from "webfontloader";
+import {Container, Nav, Navbar} from "react-bootstrap";
 
 function Navigation() {
     return (
