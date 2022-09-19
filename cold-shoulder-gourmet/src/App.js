@@ -12,12 +12,12 @@ function App() {
     useEffect(() => {
         WebFont.load({
             google: {
-                families: ['Allerta Stencil', "Cedarville Cursive"]
+                families: ['Allerta Stencil', "Cedarville Cursive", "Nanum Gothic", "Heebo", "Stardos Stencil"]
             }
         });
     }, []);
   return (
-    <Container className="bg-dark px-5 py-2 m-0" style={{minHeight: "100vh", fontFamily:"Allerta Stencil"}} fluid>
+    <Container className="bg-dark px-0 py-2 m-0" style={{minHeight: "100vh", fontFamily:"Stardos Stencil"}} fluid>
       <Navigation/>
       <div className="text-light">
         <RouterProvider router={router}/>
