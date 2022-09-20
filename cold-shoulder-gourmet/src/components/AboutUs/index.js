@@ -10,7 +10,7 @@ function AboutUs() {
                     About Cold Shoulder Gourmet Of Charleston, SC
                 </h1>
             </Row>
-            <Row className={"h-50 p-5"} style={{fontSize:18}}>
+
                 <p>
                     Before opening Cold Shoulder, Edmunds worked with Patty Floersheimer and Trudi Wagner at both goat.sheep.cow locations for several years. While there, “honed” the skills he uses at Cold Shoulder, slicing cured meats fresh with a deli slicer, selecting cheeses that pair well with the meats and making homemade truffle cream. Meats are sourced from Smoking Goose Meatery in Indianapolis, In.; truffles from The Truffleist in New York City; freshly baked focaccia bread from Charleston’s Saffron bakery; cheeses imported from Italy; and local greens from new producer King Tide Farm.
                 </p>
