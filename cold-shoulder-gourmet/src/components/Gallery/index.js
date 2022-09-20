@@ -1,12 +1,13 @@
+
 import { Carousel } from "react-bootstrap";
 import Gallery1 from './Gallery1.jpg'
-import Gallery2 from './Gallery2.jpg'
 import Gallery3 from './Gallery3.jpg'
 import Image from 'react-bootstrap/Image'
 import './gallery.css'
 
 function Gallery() {
     return (
+
         <Carousel className="h-auto justify-content-center" fade={true} pause={"hover"}>
             <Carousel.Item interval={2000}>
                 <Image className="d-block m-auto galleryImage"
