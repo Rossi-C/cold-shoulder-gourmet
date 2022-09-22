@@ -8,7 +8,7 @@ function Navigation() {
                 <Nav className={""}>
                     <Nav.Link className={"mx-2"} href="/">Home</Nav.Link>
                     <Nav.Link className={"mx-2"}  href="/menu">Menu</Nav.Link>
-                    <Nav.Link className={"mx-2"}  href="/gallery">Gallery</Nav.Link>
+                    <Nav.Link className={"mx-2"}  href="/contactUs">Contact Us</Nav.Link>
                 </Nav>
             </Container>
         </Navbar>

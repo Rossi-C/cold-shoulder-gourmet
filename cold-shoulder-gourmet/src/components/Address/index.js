@@ -3,15 +3,15 @@ import {AiFillInstagram, AiOutlineGoogle} from "react-icons/ai";
 import {FaYelp} from "react-icons/fa";
 
 // TODO RENAME
-function Address({ address: { street, city, state, zip }, phone }) {
+function Address({ address: { Street, City, State, Zip }, phone }) {
     return (
-        <div className="m-auto">
+        <div className="my-4">
             <Col>
-                <a className={"link-light"} >
-                    <p>{street}</p>
-                    <p>{city}, {state} {zip}</p>
+                <p className={"link-light"} >
+                    <p>{Street}</p>
+                    <p>{City}, {State} {Zip}</p>
                     <p>{phone}</p>
-                </a>
+                </p>
 
                 <a className={"link-light"} href="https://www.instagram.com/coldshouldergourmet/" >
                     <AiFillInstagram style={{fontSize: 30}}/>
@@ -23,9 +23,6 @@ function Address({ address: { street, city, state, zip }, phone }) {
                     <AiOutlineGoogle style={{fontSize: 30}}/>
                 </a>
             </Col>
-
-
-
         </div>
     );
 }

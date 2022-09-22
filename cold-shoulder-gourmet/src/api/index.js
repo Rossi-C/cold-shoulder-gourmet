@@ -1,4 +1,4 @@
-import { doc, getDoc } from "firebase/firestore";
+import { doc, getDoc, setDoc } from "firebase/firestore";
 import { db } from "../firebase";
 
 export const getBusinessInfo = async () => {
@@ -14,5 +14,12 @@ export const getBusinessInfo = async () => {
         console.log("No such document!");
         return false;
     }
+}
+
+export const updateNewsLetter = async (email) => {
+    const docRef = doc(db, "business", "newsletter");
+    let obj = {}
+    obj[email] = true;
+    await setDoc(docRef, obj, {merge: true})
 }
 

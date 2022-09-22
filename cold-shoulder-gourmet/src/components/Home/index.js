@@ -4,10 +4,10 @@ import SoldOut from "../SoldOut";
 import {Col, Container, Row, Spinner} from "react-bootstrap";
 import Info from "../Info";
 import Gallery1 from '../Gallery/Gallery1.jpg'
-import Gallery2 from '../Gallery/Gallery2.jpg'
 import ImageBlock from "../ImageBlock";
-import {GiPig, GiCow} from "react-icons/gi";
+import {GiPig} from "react-icons/gi";
 import AboutUs from "../AboutUs";
+import Newsletter from "../Newsletter";
 
 function Home() {
     const [soldOut, setSoldOut] = useState(false);
@@ -53,25 +53,18 @@ function Home() {
 
             <Row className={"h-50 py-1 px-5"}>
                 <Col>
-                    <AboutUs />
+                    <AboutUs/>
                 </Col>
             </Row>
 
-            <ImageBlock
-                image={Gallery2}
-                icon={() => <GiCow style={{fontSize: 50}}/>}
-                smallCaption={""}
-                caption={"Don't be mad... Be Early."}
-                strength={-1000}
+            <Info
+                address={address}
+                hours={hours}
+                addressSize={25}
+                hoursSize={20}
+                phone={phone}
+                middleComponent={() => <Newsletter/>}
             />
-
-                <Info
-                    address={address}
-                    hours={hours}
-                    addressSize={25}
-                    hoursSize={20}
-                    phone={phone}
-                />
         </Container>
     );
 }
