@@ -2,6 +2,7 @@
   "name": "cold-shoulder-gourmet",
   "version": "0.1.0",
   "private": true,
+  "proxy" : "https://www.instagram.com/coldshouldergourmet",
   "dependencies": {
     "@testing-library/jest-dom": "^5.16.5",
     "@testing-library/react": "^13.4.0",
@@ -9,6 +10,7 @@
     "bootstrap": "^5.2.1",
     "firebase": "^9.10.0",
     "jest": "^27.5.1",
+    "origen-react-instagram-feed": "^0.0.3",
     "react": "^18.2.0",
     "react-bootstrap": "^2.5.0",
     "react-dom": "^18.2.0",
@@ -16,6 +18,7 @@
     "react-parallax": "^3.5.1",
     "react-router-dom": "^6.4.0",
     "react-scripts": "5.0.1",
+    "sass": "^1.55.0",
     "web-vitals": "^2.1.4",
     "webfontloader": "^1.6.28"
   },

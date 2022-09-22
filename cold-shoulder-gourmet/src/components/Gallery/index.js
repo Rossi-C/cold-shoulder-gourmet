@@ -19,7 +19,7 @@ function Gallery() {
             </Carousel.Item>
             <Carousel.Item interval={2000}>
                 <Image className="d-block m-auto galleryImage"
-                    src={Gallery2}
+                    src={Gallery1}
                     alt="Second slide" />
                 <Carousel.Caption>
                     <h3 className={"m-auto bg-dark w-50 px-1"}>Finest sourced meats and local vegetables...</h3>
