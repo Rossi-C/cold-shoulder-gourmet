@@ -1,38 +1,38 @@
-import { Col, Container, Row, Form, Button } from "react-bootstrap";
-import { useState } from 'react';
-import { db } from "../../firebase";
-import { doc, updateDoc } from "firebase/firestore";
+import { Col, Container, Row, Form } from "react-bootstrap";
+// import { useState } from 'react';
+// import { db } from "../../firebase";
+// import { doc, updateDoc } from "firebase/firestore";
 
 
-function EditHours({ hours: { Sunday, Monday, Tuesday, Wednesday, Thursday, Friday, Saturday } }) {
-    const [sunday, setSunday] = useState(Sunday);
-    const [monday, setMonday] = useState(Monday);
-    const [tuesday, setTuesday] = useState(Tuesday);
-    const [wednesday, setWednesday] = useState(Wednesday);
-    const [thursday, setThursday] = useState(Thursday);
-    const [friday, setFriday] = useState(Friday);
-    const [saturday, setSaturday] = useState(Saturday);
-    const businessDocRef = doc(db, 'business', 'info');
+function EditHours({ hours, setHours }) {
+    // const [sunday, setSunday] = useState(Sunday);
+    // const [monday, setMonday] = useState(Monday);
+    // const [tuesday, setTuesday] = useState(Tuesday);
+    // const [wednesday, setWednesday] = useState(Wednesday);
+    // const [thursday, setThursday] = useState(Thursday);
+    // const [friday, setFriday] = useState(Friday);
+    // const [saturday, setSaturday] = useState(Saturday);
+    // const businessDocRef = doc(db, 'business', 'info');
 
-    const initialState = "Submit"
-    const [buttonText, setButtonText] = useState(initialState);
+    // const initialState = "Submit"
+    // const [buttonText, setButtonText] = useState(initialState);
 
-    const changeButtonText = (text) => {
-        setButtonText(text);
-        setTimeout(() => setButtonText(initialState), [1000])
-    };
+    // const changeButtonText = (text) => {
+    //     setButtonText(text);
+    //     setTimeout(() => setButtonText(initialState), [1000])
+    // };
 
-    const updateHours = async () => {
-        await updateDoc(businessDocRef, {
-            "hours.Sunday": sunday,
-            "hours.Monday": monday,
-            "hours.Tuesday": tuesday,
-            "hours.Wednesday": wednesday,
-            "hours.Thursday": thursday,
-            "hours.Friday": friday,
-            "hours.Saturday": saturday
-        })
-    };
+    // const updateHours = async () => {
+    //     await updateDoc(businessDocRef, {
+    //         "hours.Sunday": sunday,
+    //         "hours.Monday": monday,
+    //         "hours.Tuesday": tuesday,
+    //         "hours.Wednesday": wednesday,
+    //         "hours.Thursday": thursday,
+    //         "hours.Friday": friday,
+    //         "hours.Saturday": saturday
+    //     })
+    // };
 
     return (
         <Container fluid style={{ fontSize: 20 }}>
@@ -47,10 +47,8 @@ function EditHours({ hours: { Sunday, Monday, Tuesday, Wednesday, Thursday, Frid
                                 <Form.Control
                                     type="text"
                                     name="sunday"
-                                    value={sunday}
-                                    onChange={async (e) => {
-                                        await setSunday(e.target.value);
-                                    }} />
+                                    value={hours.Sunday}
+                                    onChange={e => setHours({ ...hours, Sunday: e.target.value })} />
                             </Col>
                         </Form.Group>
                         <Form.Group as={Row} className="mb-3 align-items-center justify-content-center" controlId="monday">
@@ -61,10 +59,8 @@ function EditHours({ hours: { Sunday, Monday, Tuesday, Wednesday, Thursday, Frid
                                 <Form.Control
                                     type="text"
                                     name="monday"
-                                    value={monday}
-                                    onChange={async (e) => {
-                                        await setMonday(e.target.value);
-                                    }} />
+                                    value={hours.Monday}
+                                    onChange={e => setHours({ ...hours, Monday: e.target.value })} />
                             </Col>
                         </Form.Group>
                         <Form.Group as={Row} className="mb-3 align-items-center justify-content-center" controlId="Tuesday">
@@ -75,10 +71,8 @@ function EditHours({ hours: { Sunday, Monday, Tuesday, Wednesday, Thursday, Frid
                                 <Form.Control
                                     type="text"
                                     name="tuesday"
-                                    value={tuesday}
-                                    onChange={async (e) => {
-                                        await setTuesday(e.target.value);
-                                    }} />
+                                    value={hours.Tuesday}
+                                    onChange={e => setHours({ ...hours, Tuesday: e.target.value })} />
                             </Col>
                         </Form.Group>
                         <Form.Group as={Row} className="mb-3 align-items-center justify-content-center" controlId="Wednesday">
@@ -89,10 +83,8 @@ function EditHours({ hours: { Sunday, Monday, Tuesday, Wednesday, Thursday, Frid
                                 <Form.Control
                                     type="text"
                                     name="wednesday"
-                                    value={wednesday}
-                                    onChange={async (e) => {
-                                        await setWednesday(e.target.value);
-                                    }} />
+                                    value={hours.Wednesday}
+                                    onChange={e => setHours({ ...hours, Wednesday: e.target.value })} />
                             </Col>
                         </Form.Group>
                     </Col>
@@ -105,10 +97,8 @@ function EditHours({ hours: { Sunday, Monday, Tuesday, Wednesday, Thursday, Frid
                                 <Form.Control
                                     type="text"
                                     name="thursday"
-                                    value={thursday}
-                                    onChange={async (e) => {
-                                        await setThursday(e.target.value);
-                                    }} />
+                                    value={hours.Thursday}
+                                    onChange={e => setHours({ ...hours, Thursday: e.target.value })} />
                             </Col>
                         </Form.Group>
                         <Form.Group as={Row} className="mb-3 align-items-center justify-content-center" controlId="Friday">
@@ -119,10 +109,8 @@ function EditHours({ hours: { Sunday, Monday, Tuesday, Wednesday, Thursday, Frid
                                 <Form.Control
                                     type="text"
                                     name="friday"
-                                    value={friday}
-                                    onChange={async (e) => {
-                                        await setFriday(e.target.value);
-                                    }} />
+                                    value={hours.Friday}
+                                    onChange={e => setHours({ ...hours, Friday: e.target.value })} />
                             </Col>
                         </Form.Group>
                         <Form.Group as={Row} className="mb-3 align-items-center justify-content-center" controlId="Saturday">
@@ -133,13 +121,11 @@ function EditHours({ hours: { Sunday, Monday, Tuesday, Wednesday, Thursday, Frid
                                 <Form.Control
                                     type="text"
                                     name="saturday"
-                                    value={saturday}
-                                    onChange={async (e) => {
-                                        await setSaturday(e.target.value);
-                                    }} />
+                                    value={hours.Saturday}
+                                    onChange={e => setHours({ ...hours, Saturday: e.target.value })} />
                             </Col>
                         </Form.Group>
-                        <Form.Group as={Row} className="mb-3 align-items-center justify-content-center">
+                        {/* <Form.Group as={Row} className="mb-3 align-items-center justify-content-center">
                             <Col sm={{ span: 6, offset: 2 }}>
                                 <Button
                                     className="mt-1"
@@ -151,10 +137,23 @@ function EditHours({ hours: { Sunday, Monday, Tuesday, Wednesday, Thursday, Frid
                                     {buttonText}
                                 </Button>
                             </Col>
-                        </Form.Group>
+                        </Form.Group> */}
                     </Col>
                 </Row>
             </Form>
+            {/* <Row>
+                <Col lg={'auto'}>
+                    <p>Sunday - {hours.Sunday}</p>
+                    <p>Monday - {hours.Monday}</p>
+                    <p>Tuesday - {hours.Tuesday}</p>
+                    <p>Wednesday - {hours.Wednesday}</p>
+                </Col>
+                <Col lg={'auto'}>
+                    <p>Thursday - {hours.Thursday}</p>
+                    <p>Friday - {hours.Friday}</p>
+                    <p>Saturday - {hours.Saturday}</p>
+                </Col>
+            </Row> */}
         </Container>
     );
 }
