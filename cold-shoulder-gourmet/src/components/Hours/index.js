@@ -2,7 +2,7 @@ import {Col, Container, Row} from "react-bootstrap";
 
 function Hours({ hours }) {
     return (
-        <Container fluid style={{fontSize: 20}}>
+        <Container fluid>
             <Row>
                 <Col lg={'auto'}>
                     <p>Sunday - {hours.Sunday}</p>
