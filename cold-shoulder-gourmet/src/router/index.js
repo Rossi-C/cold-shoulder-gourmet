@@ -6,6 +6,7 @@ import Menu from "../components/Menu";
 import Admin from "../components/Admin";
 import Gallery from "../components/Gallery";
 import ContactUs from "../components/ContactUs";
+import AboutUs from "../components/AboutUs";
 
 export const router = createBrowserRouter([
     {
