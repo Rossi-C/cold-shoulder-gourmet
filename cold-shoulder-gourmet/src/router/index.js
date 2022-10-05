@@ -3,6 +3,7 @@ import {
 } from "react-router-dom";
 import Home from "../components/Home";
 import Menu from "../components/Menu";
+import Admin from "../components/Admin";
 import Gallery from "../components/Gallery";
 import ContactUs from "../components/ContactUs";
 
@@ -12,8 +13,17 @@ export const router = createBrowserRouter([
         element: <Home />
     },
     {
+        path: "/aboutUs",
+        element: <AboutUs />
+    },
+    {
+
         path: "/menu",
         element: <Menu />
+    },
+    {
+        path: "/admin",
+        element: <Admin />
     },
     {
         path: "/gallery",

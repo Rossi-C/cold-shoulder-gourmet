@@ -1,6 +1,3 @@
-import {Col} from "react-bootstrap";
-import {AiFillInstagram, AiOutlineGoogle} from "react-icons/ai";
-import {FaYelp} from "react-icons/fa";
 
 // TODO RENAME
 function Address({ address: { Street, City, State, Zip }, phone }) {
