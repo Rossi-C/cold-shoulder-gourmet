@@ -16,77 +16,93 @@ function Menu() {
     const [sweet, setSweet] = useState(false)
 
     return (
-        <Container>
+        <Container >
             <Row className={"p-5"}>
                 <h1>
-                    S O M E T H I N G...
+                    Offerings
                 </h1>
+                <p style={{fontSize: 25}} className={'my-2'}>
+                    A variety of BADASS sandwiches. They come as they are. NO SUBSTITUTIONS. Got Complaints? Kick rocks.
+                    We support our local bakers and farmers.
+                </p>
             </Row>
             <MenuItem
-                name={'GOURMET'}
+                name={'SOMETHING GOURMET'}
                 description={'(prosciutto, parmesan, truffle cream, truffle honey, greens)'}
                 setDisplay={setGourmet}
                 display={gourmet}
                 image={Gourmet}
+                price={11}
             />
             <MenuItem
-                name={'CLASSIC'}
+                name={'SOMETHING CLASSIC'}
                 description={'(Toscano salami, prosciutto, sun dried tomatoes, mozzarella, greens, balsamic)'}
                 setDisplay={setClassic}
                 display={classic}
                 image={Gourmet}
+                price={10}
             />
             <MenuItem
-                name={'VEGETARIAN'}
+                name={'SOMETHING VEGETARIAN'}
                 description={'(sun dried tomatoes, mozzarella, basil, balsamic, truffle salt)'}
                 setDisplay={setVegetarian}
                 display={vegetarian}
                 image={Gourmet}
+                vegetarian={true}
+                price={10}
             />
             <MenuItem
-                name={'SPICY'}
+                name={'SOMETHING SPICY'}
                 description={'(nduja, Toscano & Piccante salami, greens, parmesan, truffle cream, truffle hot sauce)'}
                 setDisplay={setSpicy}
                 display={spicy}
                 image={Gourmet}
+                spicy={true}
+                price={12}
             />
             <MenuItem
-                name={'ELSE'}
+                name={'SOMETHING ELSE'}
                 description={'(mortadella, parmesan, greens, truffle cream)'}
                 setDisplay={setElsey}
                 display={elsey}
                 image={Gourmet}
+                price={10}
             />
             <MenuItem
-                name={'VEGAN'}
+                name={'SOMETHING VEGAN'}
                 description={'(grilled vegetables, greens, truffle hot sauce, truffle salt)'}
                 setDisplay={setVegan}
                 display={vegan}
                 image={Gourmet}
+                vegan={true}
+                price={10}
             />
             <MenuItem
-                name={'SIMPLE'}
+                name={'SOMETHING SIMPLE'}
                 description={'(mortadella)'}
                 setDisplay={setSimple}
                 display={simple}
                 image={Gourmet}
+                price={5}
             />
             <MenuItem
-                name={'NOT BREAD'}
+                name={'SOMETHING NOT ON BREAD'}
                 description={'(greens, veg or meat, cheese)'}
                 setDisplay={setNotBread}
                 display={notBread}
                 image={Gourmet}
+                price={12}
             />
             <MenuItem
-                name={'SWEET'}
+                name={'SOMETHING SWEET'}
                 description={'(Nutella, powdered sugar)'}
                 setDisplay={setSweet}
                 display={sweet}
                 image={Gourmet}
+                price={5}
             />
         </Container>
-    ) ;
+    );
 }
 
 export default Menu;

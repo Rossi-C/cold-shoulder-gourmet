@@ -3,6 +3,11 @@ import {Col, Container, Row} from "react-bootstrap";
 function Hours({ hours }) {
     return (
         <Container fluid>
+            <Row className={'mb-2'}>
+                <h1>LIMITED QUANTITY</h1>
+                <h3>Snag em' before they are gone!</h3>
+                <hr />
+            </Row>
             <Row>
                 <Col lg={'auto'}>
                     <p>Sunday - {hours.Sunday}</p>

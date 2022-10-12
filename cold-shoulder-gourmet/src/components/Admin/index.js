@@ -64,8 +64,11 @@ function Admin() {
 
     useEffect(() => {
         setLoading(true);
+        // eslint-disable-next-line
         gatherData();
+        // eslint-disable-next-line
         initiateAuth();
+        // eslint-disable-next-line
     }, [])
 
     const updateBusinessInfo = async () => {

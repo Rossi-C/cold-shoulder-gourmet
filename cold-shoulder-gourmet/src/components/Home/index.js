@@ -3,22 +3,34 @@ import {getBusinessInfo} from "../../api";
 import SoldOut from "../SoldOut";
 import {Col, Container, Row, Spinner} from "react-bootstrap";
 import Info from "../Info";
-import Gallery1 from '../Gallery/Gallery1.jpg'
-import ImageBlock from "../ImageBlock";
-import {GiPig} from "react-icons/gi";
-import AboutUs from "../AboutUs";
-import Newsletter from "../Newsletter";
+import BckGrnd from '../SiteHeaderImageBlock/main_backgorund.png'
+import SiteHeaderImageBlock from "../SiteHeaderImageBlock";
 
 function Home() {
     const [soldOut, setSoldOut] = useState(false);
     const [phone, setPhone] = useState(null);
-    const [address, setAddress] = useState(null);
-    const [hours, setHours] = useState(null);
+    const [address, setAddress] = useState({
+        "Zip": 29407,
+        "State": "SC",
+        "City": "Charleston",
+        "Street": "1684 Old Towne Rd"
+    });
+    const [hours, setHours] = useState({
+        "Friday": "8:00 AM - 4:00 PM",
+        "Tuesday": "Closed",
+        "Thursday": "8:00 AM - 4:00 PM",
+        "Saturday": "8:00 AM - 4:00 PM",
+        "Monday": "8:00 AM - 4:00 PM",
+        "Sunday": "8:00 AM - 4:00 PM",
+        "Wednesday": "Closed"
+    });
     const [loading, setLoading] = useState(false);
 
     const updateHomeState = async () => {
         setLoading(true);
         const {soldOut, address, hours, phone} = await getBusinessInfo() // returns {souldOut: boolean, address:Object, hours:Object}
+        console.log(address);
+        console.log(hours);
         if (soldOut || address || hours) {
             setSoldOut(soldOut);
             setAddress(address);
@@ -43,17 +55,43 @@ function Home() {
             }
 
             <SoldOut soldOut={soldOut}/>
-            <ImageBlock
-                image={Gallery1}
-                icon={() => <GiPig style={{fontSize: 50}}/>}
-                smallCaption={"Focaccia sandwich shop slinging the classics with a punk twist.  Sandwiches, espresso, and gourmet grocery."}
-                caption={"Limited production."}
-                strength={-750}
+            <SiteHeaderImageBlock
+                image={BckGrnd}
+                strength={-400}
+                address={address}
             />
 
             <Row className={"h-50 py-1 px-5"}>
                 <Col>
-                    <AboutUs/>
+                    <Container >
+                        <Row className={"h-50 p-5 text-center"} style={{fontWeight: 500, letterSpacing: "0.25em"}}>
+                            <h1 style={{fontSize: 88}}>
+                                ABOUT THESE BADASS SANDWICHES
+                            </h1>
+                        </Row>
+                        <Row style={{fontSize: 30}}>
+                            <p>
+                                At Cold Shoulder Gourmet, we think good food and quality ingredients should be available to everyone
+                                at prices that don’t cost an arm, leg or spleen.
+                            </p>
+                            <p>
+                                So with the help of some amazing local farmers, bakers and candle stick makers, we are able to offer
+                                you amazing fresh focaccia sandwiches with rich, decadent spreads and hand sliced cured meats,
+                                incredible locally grown greens, and delicious cheeses.
+                            </p>
+                            <p>
+                                Don't let our light humor lull you into a false sense of security, we know what we are doing and we
+                                are here to blow your taste buds away!
+                            </p>
+                            <p>
+                                Opening in Charleston, SC - we’ve seen plenty of changes in the way people approach food in this
+                                city, and we couldn’t be more excited.
+                            </p>
+                            <p>
+                                Come and check us out in person/order online and discover something deliciously badass today.
+                            </p>
+                        </Row>
+                    </Container>
                 </Col>
             </Row>
 
@@ -63,7 +101,7 @@ function Home() {
                 addressSize={25}
                 hoursSize={20}
                 phone={phone}
-                middleComponent={() => <Newsletter/>}
+                middleComponent={() => null }
             />
         </Container>
     );
