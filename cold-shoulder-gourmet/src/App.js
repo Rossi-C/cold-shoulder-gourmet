@@ -36,16 +36,18 @@ function App() {
         "Sunday": "8:00 AM - 4:00 PM",
         "Wednesday": "Closed"
     });
+    const [winterMenu, setWinterMenu] = useState(false);
     const [loading, setLoading] = useState(false);
 
     const updateHomeState = async () => {
         setLoading(true);
-        const {soldOut, address, hours, phone} = await getBusinessInfo() // returns {souldOut: boolean, address:Object, hours:Object}
+        const {soldOut, address, hours, phone, winterMenu} = await getBusinessInfo() // returns {souldOut: boolean, address:Object, hours:Object}
         if (soldOut || address || hours) {
             setSoldOut(soldOut);
             setAddress(address);
             setHours(hours);
             setPhone(phone)
+            setWinterMenu(winterMenu)
             setLoading(false);
         }
     }
@@ -84,11 +86,11 @@ function App() {
                   />
                   <Route
                       path='menu'
-                      element={<Menu />}
+                      element={<Menu winterMenu={winterMenu} loading={loading}/>}
                   />
                   <Route
                       path='admin'
-                      element={<Admin  soldOut={soldOut} address={address} hours={hours} phone={phone}/>}
+                      element={<Admin  soldOut={soldOut} address={address} hours={hours} phone={phone} winterMenu={winterMenu} loading={loading}/>}
                   />
                   <Route
                       path='producers'

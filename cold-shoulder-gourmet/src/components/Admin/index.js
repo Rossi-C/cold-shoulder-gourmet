@@ -1,7 +1,7 @@
 import {getAdmins} from "../../api";
 import {useState, useEffect} from 'react';
 import {Row, Spinner, Col, Button, Container, Form} from "react-bootstrap";
-import {doc, setDoc} from "firebase/firestore";
+import {doc, updateDoc} from "firebase/firestore";
 import { db, app} from "../../firebase";
 import EditHours from "../Hours/edit";
 import EditAddress from "../Address/edit";
@@ -9,11 +9,10 @@ import Login from "../Login";
 import { onAuthStateChanged, getAuth } from "firebase/auth";
 
 
-function Admin({soldOut, address, hours, winterMenu}) {
+function Admin({soldOut, address, hours, winterMenu, loading}) {
     const [localSoldOut, setSoldOut] = useState(false);
     const [localAddress, setAddress] = useState(null);
     const [localHours, setHours] = useState(null);
-    const [loading, setLoading] = useState(false);
     const [isLoggedIn, setIsLoggedIn] = useState(false);
     const [localWinterMenu, setWinterMenu] = useState(false);
     const [isAdmin, setIsAdmin] = useState(false);
@@ -49,31 +48,39 @@ function Admin({soldOut, address, hours, winterMenu}) {
     }
 
     const gatherData = async () => {
-        if (soldOut || address || hours) {
-            setSoldOut(soldOut);
+        if (soldOut || address || hours || winterMenu) {
+            setSoldOut(Boolean(soldOut));
             setAddress(address);
             setHours(hours);
-            setWinterMenu(winterMenu);
-            setLoading(false);
+            setWinterMenu(Boolean(winterMenu));
         }
     }
 
     useEffect(() => {
-        setLoading(true)
         gatherData()
         initiateAuth();
         // eslint-disable-next-line
-    }, [])
+    }, [loading])
+
+    const convertToBool = (value) => {
+        if(value === 'true'){
+            return true
+        }
+        if(value === 'false'){
+            return false
+        }
+    }
 
     const updateBusinessInfo = async () => {
         const businessDocRef = doc(db, 'business', 'info')
-        console.log('localwintermenu', localWinterMenu)
-        await setDoc(businessDocRef, {
-            soldOut: localSoldOut,
+        const soldOut = convertToBool(localSoldOut)
+        const winterMenu = convertToBool(localWinterMenu)
+        await updateDoc(businessDocRef, {
+            soldOut,
             hours: localHours,
             address:localAddress,
-            winterMenu: localWinterMenu
-        }, {merge: true})
+            winterMenu,
+        })
     };
 
     const changeButtonText = (text) => {
@@ -91,8 +98,8 @@ function Admin({soldOut, address, hours, winterMenu}) {
                                 <Form.Group controlID="stock">
                                     <Form.Label>Stock</Form.Label>
                                     <Form.Select value={localSoldOut} onChange={e => setSoldOut(e.target.value)}>
-                                        <option value={false}>In Stock</option>
-                                        <option value={true}>Out of Stock</option>
+                                        <option value={Boolean(true)}>Out of Stock</option>
+                                        <option value={Boolean(false)}>In Stock</option>
                                     </Form.Select>
                                 </Form.Group>
                             </Col>
@@ -100,8 +107,8 @@ function Admin({soldOut, address, hours, winterMenu}) {
                                 <Form.Group controlID="menu">
                                     <Form.Label>Winter Menu?</Form.Label>
                                     <Form.Select value={localWinterMenu} onChange={e => setWinterMenu(e.target.value)}>
-                                        <option value={true}>Yes</option>
-                                        <option value={false}>No</option>
+                                        <option value={Boolean(true)}>Yes</option>
+                                        <option value={Boolean(false)}>No</option>
                                     </Form.Select>
                                 </Form.Group>
                             </Col>
