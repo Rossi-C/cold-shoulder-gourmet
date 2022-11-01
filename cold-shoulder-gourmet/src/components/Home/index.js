@@ -6,54 +6,9 @@ import Info from "../Info";
 import BckGrnd from '../SiteHeaderImageBlock/main_backgorund.png'
 import SiteHeaderImageBlock from "../SiteHeaderImageBlock";
 
-function Home() {
-    const [soldOut, setSoldOut] = useState(false);
-    const [phone, setPhone] = useState(null);
-    const [address, setAddress] = useState({
-        "Zip": 29407,
-        "State": "SC",
-        "City": "Charleston",
-        "Street": "1684 Old Towne Rd"
-    });
-    const [hours, setHours] = useState({
-        "Friday": "8:00 AM - 4:00 PM",
-        "Tuesday": "Closed",
-        "Thursday": "8:00 AM - 4:00 PM",
-        "Saturday": "8:00 AM - 4:00 PM",
-        "Monday": "8:00 AM - 4:00 PM",
-        "Sunday": "8:00 AM - 4:00 PM",
-        "Wednesday": "Closed"
-    });
-    const [loading, setLoading] = useState(false);
-
-    const updateHomeState = async () => {
-        setLoading(true);
-        const {soldOut, address, hours, phone} = await getBusinessInfo() // returns {souldOut: boolean, address:Object, hours:Object}
-        console.log(address);
-        console.log(hours);
-        if (soldOut || address || hours) {
-            setSoldOut(soldOut);
-            setAddress(address);
-            setHours(hours);
-            setPhone(phone)
-            setLoading(false);
-        }
-    }
-    useEffect(() => {
-        updateHomeState();
-    }, [])
-
+function Home({soldOut, address, hours, phone}) {
     return (
         <Container fluid>
-            {
-                loading &&
-                <Row className={"h-50 p-5"}>
-                    <Spinner className="m-auto" animation="border" role="status" variant={"light"}>
-                        <span className="visually-hidden">Loading...</span>
-                    </Spinner>
-                </Row>
-            }
-
             <SoldOut soldOut={soldOut}/>
             <SiteHeaderImageBlock
                 image={BckGrnd}

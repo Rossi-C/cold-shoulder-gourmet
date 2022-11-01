@@ -1,15 +1,57 @@
-import {router} from "./router";
 import {
-  RouterProvider,
+    BrowserRouter, Route,
+    Routes,
 } from "react-router-dom";
 import Navigation from "./components/Navigation";
-import {Container} from "react-bootstrap";
-import {useEffect} from "react";
+import {Container, Row, Spinner} from "react-bootstrap";
+import {useEffect, useState} from "react";
 import WebFont from "webfontloader";
 import {AiFillInstagram} from "react-icons/ai";
+import {getBusinessInfo} from "./api";
+import Home from "./components/Home";
+import AboutUs from "./components/AboutUs";
+import Menu from "./components/Menu";
+import Admin from "./components/Admin";
+import Producers from "./components/Producers";
+import MeetTheTeam from "./components/MeetTheTeam";
+import Services from "./components/Services";
+import Policies from "./components/Policies";
 
 
 function App() {
+    const [soldOut, setSoldOut] = useState(false);
+    const [phone, setPhone] = useState(null);
+    const [address, setAddress] = useState({
+        "Zip": 29407,
+        "State": "SC",
+        "City": "Charleston",
+        "Street": "1684 Old Towne Rd"
+    });
+    const [hours, setHours] = useState({
+        "Friday": "8:00 AM - 4:00 PM",
+        "Tuesday": "Closed",
+        "Thursday": "8:00 AM - 4:00 PM",
+        "Saturday": "8:00 AM - 4:00 PM",
+        "Monday": "8:00 AM - 4:00 PM",
+        "Sunday": "8:00 AM - 4:00 PM",
+        "Wednesday": "Closed"
+    });
+    const [loading, setLoading] = useState(false);
+
+    const updateHomeState = async () => {
+        setLoading(true);
+        const {soldOut, address, hours, phone} = await getBusinessInfo() // returns {souldOut: boolean, address:Object, hours:Object}
+        if (soldOut || address || hours) {
+            setSoldOut(soldOut);
+            setAddress(address);
+            setHours(hours);
+            setPhone(phone)
+            setLoading(false);
+        }
+    }
+    useEffect(() => {
+        updateHomeState();
+    }, [])
     useEffect(() => {
         WebFont.load({
             google: {
@@ -17,11 +59,55 @@ function App() {
             }
         });
     }, []);
+
   return (
     <Container className="bg-black px-0 py-2 m-0" style={{minHeight: "100vh", fontFamily:"Oswald"}} fluid>
       <Navigation/>
       <div className="text-light">
-        <RouterProvider router={router}/>
+          {
+              loading &&
+              <Row className={"h-50 p-5"}>
+                  <Spinner className="m-auto" animation="border" role="status" variant={"light"}>
+                      <span className="visually-hidden">Loading...</span>
+                  </Spinner>
+              </Row>
+          }
+          <BrowserRouter>
+              <Routes>
+                  <Route
+                      path='/'
+                      element={<Home soldOut={soldOut} address={address} hours={hours} phone={phone}/>}
+                  />
+                  <Route
+                      path='aboutUs'
+                      element={<AboutUs />}
+                  />
+                  <Route
+                      path='menu'
+                      element={<Menu />}
+                  />
+                  <Route
+                      path='admin'
+                      element={<Admin  soldOut={soldOut} address={address} hours={hours} phone={phone}/>}
+                  />
+                  <Route
+                      path='producers'
+                      element={<Producers />}
+                  />
+                  <Route
+                      path='team'
+                      element={<MeetTheTeam />}
+                  />
+                  <Route
+                      path='services'
+                      element={<Services />}
+                  />
+                  <Route
+                      path='policies'
+                      element={<Policies />}
+                  />
+              </Routes>
+          </BrowserRouter>
       </div>
         <div>
             <hr className={'text-light'} />
