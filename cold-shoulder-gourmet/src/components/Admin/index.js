@@ -1,7 +1,7 @@
 import {getAdmins} from "../../api";
 import {useState, useEffect} from 'react';
 import {Row, Spinner, Col, Button, Container, Form} from "react-bootstrap";
-import {doc, updateDoc} from "firebase/firestore";
+import {doc, setDoc} from "firebase/firestore";
 import { db, app} from "../../firebase";
 import EditHours from "../Hours/edit";
 import EditAddress from "../Address/edit";
@@ -9,12 +9,13 @@ import Login from "../Login";
 import { onAuthStateChanged, getAuth } from "firebase/auth";
 
 
-function Admin({soldOut, address, hours, phone}) {
+function Admin({soldOut, address, hours, winterMenu}) {
     const [localSoldOut, setSoldOut] = useState(false);
     const [localAddress, setAddress] = useState(null);
     const [localHours, setHours] = useState(null);
     const [loading, setLoading] = useState(false);
     const [isLoggedIn, setIsLoggedIn] = useState(false);
+    const [localWinterMenu, setWinterMenu] = useState(false);
     const [isAdmin, setIsAdmin] = useState(false);
 
     const initialState = "Submit"
@@ -52,6 +53,7 @@ function Admin({soldOut, address, hours, phone}) {
             setSoldOut(soldOut);
             setAddress(address);
             setHours(hours);
+            setWinterMenu(winterMenu);
             setLoading(false);
         }
     }
@@ -65,11 +67,13 @@ function Admin({soldOut, address, hours, phone}) {
 
     const updateBusinessInfo = async () => {
         const businessDocRef = doc(db, 'business', 'info')
-        await updateDoc(businessDocRef, {
-            soldOut:localSoldOut,
+        console.log('localwintermenu', localWinterMenu)
+        await setDoc(businessDocRef, {
+            soldOut: localSoldOut,
             hours: localHours,
             address:localAddress,
-        })
+            winterMenu: localWinterMenu
+        }, {merge: true})
     };
 
     const changeButtonText = (text) => {
@@ -78,57 +82,66 @@ function Admin({soldOut, address, hours, phone}) {
     };
 
     return (
-    isLoggedIn ?
+        isLoggedIn ?
             isAdmin ?
-                <Container fluid style={{fontSize: 20}}>
-                <Form className="my-5">
-                    <Row className="justify-content-md-center">
-                        <Col md="auto">
-                            <Form.Group controlID="stock">
-                                <Form.Label>Stock</Form.Label>
-                                <Form.Select value={localSoldOut} onChange={e => setSoldOut(e.target.value)}>
-                                    <option value={false}>In Stock</option>
-                                    <option value={true}>Out of Stock</option>
-                                </Form.Select>
-                            </Form.Group>
-                        </Col>
+                <Container fluid style={{ fontSize: 20 }}>
+                    <Form className="my-5">
+                        <Row className="justify-content-md-center">
+                            <Col md="auto">
+                                <Form.Group controlID="stock">
+                                    <Form.Label>Stock</Form.Label>
+                                    <Form.Select value={localSoldOut} onChange={e => setSoldOut(e.target.value)}>
+                                        <option value={false}>In Stock</option>
+                                        <option value={true}>Out of Stock</option>
+                                    </Form.Select>
+                                </Form.Group>
+                            </Col>
+                            <Col md="auto">
+                                <Form.Group controlID="menu">
+                                    <Form.Label>Winter Menu?</Form.Label>
+                                    <Form.Select value={localWinterMenu} onChange={e => setWinterMenu(e.target.value)}>
+                                        <option value={true}>Yes</option>
+                                        <option value={false}>No</option>
+                                    </Form.Select>
+                                </Form.Group>
+                            </Col>
+                        </Row>
+                    </Form>
+                    <Row>
                     </Row>
-                </Form>
-                <Row>
-                </Row>
-                <Row className="mt-5">
-                    {localHours && < EditHours hours={localHours} setHours={setHours}/>}
-                </Row>
-                <Row className="mt-5">
-                    {localAddress && < EditAddress address={localAddress} setAddress={setAddress}/>}
-                </Row>
-                {
-                    loading &&
-                    <Row className={"h-50 p-5"}>
-                        <Spinner className="m-auto" animation="border" role="status" variant={"light"}>
-                            <span className="visually-hidden">Loading...</span>
-                        </Spinner>
+                    <Row className="mt-5">
+                        {hours && < EditHours hours={localHours} setHours={setHours} />}
                     </Row>
-                }
-                <Row className="justify-center-md-content my-5">
-                    <Button
-                        style={{color: 'white', borderWidth: 1, borderColor: 'white'}}
-                        className="mx-auto"
-                        as={Col}
-                        sm={2}
-                        type="button"
-                        variant={"primary"}
-                        onClick={async () => {
-                            changeButtonText('Updating...')
-                            await updateBusinessInfo();
-                        }}>
-                        {buttonText}
-                    </Button>
-                </Row>
-            </Container> :
+                    <Row className="mt-5">
+                        {address && < EditAddress address={localAddress} setAddress={setAddress} />}
+                    </Row>
+                    {
+                        loading &&
+                        <Row className={"h-50 p-5"}>
+                            <Spinner className="m-auto" animation="border" role="status" variant={"light"}>
+                                <span className="visually-hidden">Loading...</span>
+                            </Spinner>
+                        </Row>
+                    }
+                    <Row className="justify-center-md-content my-5">
+                        <Button
+                            style={{ color: 'white', borderWidth: 1, borderColor: 'white' }}
+                            className="mx-auto"
+                            as={Col}
+                            sm={2}
+                            type="button"
+                            variant={"primary"}
+                            onClick={async () => {
+                                changeButtonText('Updating...')
+                                await updateBusinessInfo();
+                            }}>
+                            {buttonText}
+                        </Button>
+                    </Row>
+                </Container> :
                 <h1 className={"text-center"}>You do not have access to this page!!!!</h1>
-        :
-        <Login  determineIfAdmin={determineIfAdmin}/>
+            :
+            <Login determineIfAdmin={determineIfAdmin} />
     )
 }
 
