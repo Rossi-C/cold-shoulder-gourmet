@@ -50,7 +50,7 @@ function Home({soldOut, address, hours, phone, loading}) {
                             </Container>
                         </Col>
                         < hr />
-                        <InstaGrid />
+                        {/*<InstaGrid />*/}
                         < hr />
                     </Row>
 

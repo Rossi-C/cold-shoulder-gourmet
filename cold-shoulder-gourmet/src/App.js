@@ -67,6 +67,8 @@ function App() {
       <div className="text-light">
 
           <BrowserRouter>
+
+              <Navigation/>
               {
                   loading &&
                   <Row className={"h-50 p-5"}>
@@ -75,7 +77,6 @@ function App() {
                       </Spinner>
                   </Row>
               }
-              <Navigation/>
               <Routes>
                   <Route
                       path='/'
