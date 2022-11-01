@@ -1,85 +1,84 @@
-import { getAdmins, getBusinessInfo } from "../../api";
-import { useState, useEffect } from 'react';
-import { Row, Spinner, Col, Button, Container, Form } from "react-bootstrap";
-import { doc, updateDoc } from "firebase/firestore";
-import { auth, db } from "../../firebase";
+import {getAdmins} from "../../api";
+import {useState, useEffect} from 'react';
+import {Row, Spinner, Col, Button, Container, Form} from "react-bootstrap";
+import {doc, updateDoc} from "firebase/firestore";
+import { db, app} from "../../firebase";
 import EditHours from "../Hours/edit";
 import EditAddress from "../Address/edit";
 import Login from "../Login";
-import { onAuthStateChanged } from "firebase/auth";
+import { onAuthStateChanged, getAuth } from "firebase/auth";
 
 
-function Admin() {
-    const [soldOut, setSoldOut] = useState(false);
-    const [address, setAddress] = useState(null);
-    const [hours, setHours] = useState(null);
-    const [loading, setLoading] = useState(false);
+function Admin({soldOut, address, hours, winterMenu, loading}) {
+    const [localSoldOut, setSoldOut] = useState(false);
+    const [localAddress, setAddress] = useState(null);
+    const [localHours, setHours] = useState(null);
     const [isLoggedIn, setIsLoggedIn] = useState(false);
+    const [localWinterMenu, setWinterMenu] = useState(false);
     const [isAdmin, setIsAdmin] = useState(false);
-    const [admins, setAdmins] = useState(null);
-    const [winterMenu, setWinterMenu] = useState(false);
 
     const initialState = "Submit"
     const [buttonText, setButtonText] = useState(initialState);
 
-    const checkForUser = async (user) => {
-        if (user) {
-            console.log('checkForUser user: ', user);
+    const checkForUser = async (email) => {
             setIsLoggedIn(true)
-            await determineIfAdmin(user.email)
-        } else {
-            console.log('NO USER FOUND');
-            await determineIfAdmin(null)
-        }
+            await determineIfAdmin(email)
     }
 
     const initiateAuth = async () => {
+        const auth = getAuth(app);
         onAuthStateChanged(auth, (user) => {
-            console.log('onAuthStateChanged user: ', user);
-            checkForUser(user)
+            // console.log('on auth state changed', user)
+            if(user){
+                checkForUser(user.email)
+            }
         });
-        const user = auth.currentUser;
-        await checkForUser(user);
     }
 
     const determineIfAdmin = async (email) => {
-        if (admins && email) {
-            console.log(admins, email);
-            if (admins[email]) {
+        const admins = await getAdmins()
+        if(admins && email){
+            if(admins[email]){
                 setIsAdmin(true)
             }
         } else {
             setIsAdmin(false)
+            setIsLoggedIn(false)
         }
     }
 
     const gatherData = async () => {
-        const { soldOut, address, hours, winterMenu } = await getBusinessInfo()
         if (soldOut || address || hours || winterMenu) {
-            setSoldOut(soldOut);
+            setSoldOut(Boolean(soldOut));
             setAddress(address);
             setHours(hours);
-            setWinterMenu(winterMenu);
-            setLoading(false);
+            setWinterMenu(Boolean(winterMenu));
         }
-        setAdmins(await getAdmins());
     }
 
     useEffect(() => {
-        setLoading(true);
-        // eslint-disable-next-line
-        gatherData();
-        // eslint-disable-next-line
+        gatherData()
         initiateAuth();
         // eslint-disable-next-line
-    }, [])
+    }, [loading])
+
+    const convertToBool = (value) => {
+        if(value === 'true'){
+            return true
+        }
+        if(value === 'false'){
+            return false
+        }
+    }
 
     const updateBusinessInfo = async () => {
         const businessDocRef = doc(db, 'business', 'info')
+        const soldOut = convertToBool(localSoldOut)
+        const winterMenu = convertToBool(localWinterMenu)
         await updateDoc(businessDocRef, {
             soldOut,
-            hours,
-            address,
+            hours: localHours,
+            address:localAddress,
             winterMenu,
         })
     };
@@ -98,18 +97,18 @@ function Admin() {
                             <Col md="auto">
                                 <Form.Group controlID="stock">
                                     <Form.Label>Stock</Form.Label>
-                                    <Form.Select value={soldOut} onChange={e => setSoldOut(e.target.value)}>
-                                        <option value={false}>In Stock</option>
-                                        <option value={true}>Out of Stock</option>
+                                    <Form.Select value={localSoldOut} onChange={e => setSoldOut(e.target.value)}>
+                                        <option value={Boolean(true)}>Out of Stock</option>
+                                        <option value={Boolean(false)}>In Stock</option>
                                     </Form.Select>
                                 </Form.Group>
                             </Col>
                             <Col md="auto">
                                 <Form.Group controlID="menu">
-                                    <Form.Label>Menu</Form.Label>
-                                    <Form.Select value={winterMenu} onChange={e => setWinterMenu(e.target.value)}>
-                                        <option value={false}>Summer</option>
-                                        <option value={true}>Winter</option>
+                                    <Form.Label>Winter Menu?</Form.Label>
+                                    <Form.Select value={localWinterMenu} onChange={e => setWinterMenu(e.target.value)}>
+                                        <option value={Boolean(true)}>Yes</option>
+                                        <option value={Boolean(false)}>No</option>
                                     </Form.Select>
                                 </Form.Group>
                             </Col>
@@ -118,10 +117,10 @@ function Admin() {
                     <Row>
                     </Row>
                     <Row className="mt-5">
-                        {hours && < EditHours hours={hours} setHours={setHours} />}
+                        {hours && < EditHours hours={localHours} setHours={setHours} />}
                     </Row>
                     <Row className="mt-5">
-                        {address && < EditAddress address={address} setAddress={setAddress} />}
+                        {address && < EditAddress address={localAddress} setAddress={setAddress} />}
                     </Row>
                     {
                         loading &&
