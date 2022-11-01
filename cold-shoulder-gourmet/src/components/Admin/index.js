@@ -1,8 +1,8 @@
-import {getAdmins, getBusinessInfo} from "../../api";
-import {useState, useEffect} from 'react';
-import {Row, Spinner, Col, Button, Container, Form} from "react-bootstrap";
-import {doc, updateDoc} from "firebase/firestore";
-import {auth, db} from "../../firebase";
+import { getAdmins, getBusinessInfo } from "../../api";
+import { useState, useEffect } from 'react';
+import { Row, Spinner, Col, Button, Container, Form } from "react-bootstrap";
+import { doc, updateDoc } from "firebase/firestore";
+import { auth, db } from "../../firebase";
 import EditHours from "../Hours/edit";
 import EditAddress from "../Address/edit";
 import Login from "../Login";
@@ -17,6 +17,7 @@ function Admin() {
     const [isLoggedIn, setIsLoggedIn] = useState(false);
     const [isAdmin, setIsAdmin] = useState(false);
     const [admins, setAdmins] = useState(null);
+    const [winterMenu, setWinterMenu] = useState(false);
 
     const initialState = "Submit"
     const [buttonText, setButtonText] = useState(initialState);
@@ -42,8 +43,9 @@ function Admin() {
     }
 
     const determineIfAdmin = async (email) => {
-        if(admins && email){
-            if(admins[email]){
+        if (admins && email) {
+            console.log(admins, email);
+            if (admins[email]) {
                 setIsAdmin(true)
             }
         } else {
@@ -52,11 +54,12 @@ function Admin() {
     }
 
     const gatherData = async () => {
-        const {soldOut, address, hours} = await getBusinessInfo()
-        if (soldOut || address || hours) {
+        const { soldOut, address, hours, winterMenu } = await getBusinessInfo()
+        if (soldOut || address || hours || winterMenu) {
             setSoldOut(soldOut);
             setAddress(address);
             setHours(hours);
+            setWinterMenu(winterMenu);
             setLoading(false);
         }
         setAdmins(await getAdmins());
@@ -77,6 +80,7 @@ function Admin() {
             soldOut,
             hours,
             address,
+            winterMenu,
         })
     };
 
@@ -86,57 +90,66 @@ function Admin() {
     };
 
     return (
-    isLoggedIn ?
+        isLoggedIn ?
             isAdmin ?
-                <Container fluid style={{fontSize: 20}}>
-                <Form className="my-5">
-                    <Row className="justify-content-md-center">
-                        <Col md="auto">
-                            <Form.Group controlID="stock">
-                                <Form.Label>Stock</Form.Label>
-                                <Form.Select value={soldOut} onChange={e => setSoldOut(e.target.value)}>
-                                    <option value={false}>In Stock</option>
-                                    <option value={true}>Out of Stock</option>
-                                </Form.Select>
-                            </Form.Group>
-                        </Col>
+                <Container fluid style={{ fontSize: 20 }}>
+                    <Form className="my-5">
+                        <Row className="justify-content-md-center">
+                            <Col md="auto">
+                                <Form.Group controlID="stock">
+                                    <Form.Label>Stock</Form.Label>
+                                    <Form.Select value={soldOut} onChange={e => setSoldOut(e.target.value)}>
+                                        <option value={false}>In Stock</option>
+                                        <option value={true}>Out of Stock</option>
+                                    </Form.Select>
+                                </Form.Group>
+                            </Col>
+                            <Col md="auto">
+                                <Form.Group controlID="menu">
+                                    <Form.Label>Menu</Form.Label>
+                                    <Form.Select value={winterMenu} onChange={e => setWinterMenu(e.target.value)}>
+                                        <option value={false}>Summer</option>
+                                        <option value={true}>Winter</option>
+                                    </Form.Select>
+                                </Form.Group>
+                            </Col>
+                        </Row>
+                    </Form>
+                    <Row>
                     </Row>
-                </Form>
-                <Row>
-                </Row>
-                <Row className="mt-5">
-                    {hours && < EditHours hours={hours} setHours={setHours}/>}
-                </Row>
-                <Row className="mt-5">
-                    {address && < EditAddress address={address} setAddress={setAddress}/>}
-                </Row>
-                {
-                    loading &&
-                    <Row className={"h-50 p-5"}>
-                        <Spinner className="m-auto" animation="border" role="status" variant={"light"}>
-                            <span className="visually-hidden">Loading...</span>
-                        </Spinner>
+                    <Row className="mt-5">
+                        {hours && < EditHours hours={hours} setHours={setHours} />}
                     </Row>
-                }
-                <Row className="justify-center-md-content my-5">
-                    <Button
-                        style={{color: 'white', borderWidth: 1, borderColor: 'white'}}
-                        className="mx-auto"
-                        as={Col}
-                        sm={2}
-                        type="button"
-                        variant={"primary"}
-                        onClick={async () => {
-                            changeButtonText('Updating...')
-                            await updateBusinessInfo();
-                        }}>
-                        {buttonText}
-                    </Button>
-                </Row>
-            </Container> :
+                    <Row className="mt-5">
+                        {address && < EditAddress address={address} setAddress={setAddress} />}
+                    </Row>
+                    {
+                        loading &&
+                        <Row className={"h-50 p-5"}>
+                            <Spinner className="m-auto" animation="border" role="status" variant={"light"}>
+                                <span className="visually-hidden">Loading...</span>
+                            </Spinner>
+                        </Row>
+                    }
+                    <Row className="justify-center-md-content my-5">
+                        <Button
+                            style={{ color: 'white', borderWidth: 1, borderColor: 'white' }}
+                            className="mx-auto"
+                            as={Col}
+                            sm={2}
+                            type="button"
+                            variant={"primary"}
+                            onClick={async () => {
+                                changeButtonText('Updating...')
+                                await updateBusinessInfo();
+                            }}>
+                            {buttonText}
+                        </Button>
+                    </Row>
+                </Container> :
                 <h1 className={"text-center"}>You do not have access to this page!!!!</h1>
-        :
-        <Login  determineIfAdmin={determineIfAdmin}/>
+            :
+            <Login determineIfAdmin={determineIfAdmin} />
     )
 }
 
