@@ -64,17 +64,18 @@ function App() {
 
   return (
     <Container className="bg-black px-0 py-2 m-0" style={{minHeight: "100vh", fontFamily:"Oswald"}} fluid>
-      <Navigation/>
       <div className="text-light">
-          {
-              loading &&
-              <Row className={"h-50 p-5"}>
-                  <Spinner className="m-auto" animation="border" role="status" variant={"light"}>
-                      <span className="visually-hidden">Loading...</span>
-                  </Spinner>
-              </Row>
-          }
+
           <BrowserRouter>
+              {
+                  loading &&
+                  <Row className={"h-50 p-5"}>
+                      <Spinner className="m-auto" animation="border" role="status" variant={"light"}>
+                          <span className="visually-hidden">Loading...</span>
+                      </Spinner>
+                  </Row>
+              }
+              <Navigation/>
               <Routes>
                   <Route
                       path='/'
