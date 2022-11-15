@@ -1,12 +1,12 @@
-import { Col, Row} from "react-bootstrap";
+import { Col, Row } from "react-bootstrap";
 // import {BsChevronDown, BsChevronRight} from "react-icons/bs";
 // import Image from "react-bootstrap/Image";
-import {GiChiliPepper} from 'react-icons/gi'
+import { GiChiliPepper } from 'react-icons/gi'
 
 
-export function MenuItem({setDisplay, display, image, description, name, vegan, vegetarian, spicy, price}) {
+export function MenuItem({ setDisplay, display, image, description, name, vegan, vegetarian, spicy, price }) {
     return (
-        <Row className="m-2 p-2 border border-light " style={{fontFamily: 'Stardos Stencil'}}>
+        <Row className="m-2 p-2 border border-light " style={{ fontFamily: 'Stardos Stencil' }}>
             <Row className={'justify-content-between'}>
                 <Col className={'d-inline'}>
                     <h1>
@@ -16,7 +16,7 @@ export function MenuItem({setDisplay, display, image, description, name, vegan, 
                         {spicy &&
                             (<>
                                 <label>(</label>
-                                <GiChiliPepper  className={'mb-2'}/>
+                                <GiChiliPepper className={'mb-2'} />
                                 <label>)</label>
                             </>)
                         }
@@ -24,7 +24,7 @@ export function MenuItem({setDisplay, display, image, description, name, vegan, 
                 </Col>
                 <Col className={'d-inline text-end'}>
                     <h1>
-                        ${price}
+                        ${price.toFixed(2)}
                     </h1>
                 </Col>
             </Row>
