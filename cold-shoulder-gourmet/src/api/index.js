@@ -1,5 +1,5 @@
-import {doc, getDoc, setDoc} from "firebase/firestore";
-import {db} from "../firebase";
+import { doc, getDoc, setDoc } from "firebase/firestore";
+import { db } from "../firebase";
 
 export const getBusinessInfo = async () => {
     const docRef = doc(db, "business", "info");
@@ -26,6 +26,13 @@ export const updateNewsLetter = async (email) => {
     const docRef = doc(db, "business", "newsletter");
     let obj = {}
     obj[email] = true;
-    await setDoc(docRef, obj, {merge: true})
+    await setDoc(docRef, obj, { merge: true })
+}
+
+export const getIG = async () => {
+    const response = await fetch('http://localhost:4000/env');
+    const igInfo = await response.json();
+    console.log(igInfo);
+    return igInfo
 }
 
