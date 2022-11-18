@@ -38,9 +38,10 @@ function App() {
     });
     const [winterMenu, setWinterMenu] = useState(false);
     const [loading, setLoading] = useState(false);
+    const [igKey, setIgKey] = useState(null);
 
     const updateHomeState = async () => {
-        getIG();
+        setIgKey(await getIG())
         setLoading(true);
         const { soldOut, address, hours, phone, winterMenu } = await getBusinessInfo() // returns {souldOut: boolean, address:Object, hours:Object}
         if (soldOut || address || hours) {
@@ -80,7 +81,7 @@ function App() {
                     <Routes>
                         <Route
                             path='/'
-                            element={<Home soldOut={soldOut} address={address} hours={hours} phone={phone} />}
+                            element={<Home soldOut={soldOut} address={address} hours={hours} phone={phone} igKey={igKey} />}
                         />
                         <Route
                             path='aboutUs'
