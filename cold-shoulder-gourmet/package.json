@@ -2,38 +2,21 @@
   "name": "cold-shoulder-gourmet",
   "version": "0.1.0",
   "private": true,
-  "proxy": "https://www.instagram.com/coldshouldergourmet",
-  "dependencies": {
-    "@testing-library/jest-dom": "^5.16.5",
-    "@testing-library/react": "^13.4.0",
-    "@testing-library/user-event": "^13.5.0",
-    "bootstrap": "^5.2.1",
-    "firebase": "^9.10.0",
-    "firebaseui": "^6.0.1",
-    "jest": "^27.5.1",
-    "react": "^18.2.0",
-    "react-bootstrap": "^2.5.0",
-    "react-dom": "^18.2.0",
-    "react-icons": "^4.4.0",
-    "react-parallax": "^3.5.1",
-    "react-router-dom": "^6.4.0",
-    "react-scripts": "5.0.1",
-    "sass": "^1.55.0",
-    "web-vitals": "^2.1.4",
-    "webfontloader": "^1.6.28"
-  },
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "dev": "lerna run dev",
+    "start": "lerna run start",
+    "build": "react-scripts build"
   },
-  "eslintConfig": {
-    "extends": [
-      "react-app",
-      "react-app/jest"
-    ]
+  "dependencies": {
+    "jest": "^27.5.1"
   },
+  "devDependencies": {
+    "lerna": "^6.0.3"
+  },
+  "workspaces": [
+    "packages/server",
+    "packages/client"
+  ],
   "browserslist": {
     "production": [
       ">0.2%",
