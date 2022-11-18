@@ -1,6 +1,6 @@
 
 import { Carousel } from "react-bootstrap";
-import Gallery1 from './Gallery1.jpg'
+import Gallery1 from '../Services/Gallery1.jpg'
 import Gallery3 from './Gallery3.jpg'
 import Image from 'react-bootstrap/Image'
 import './gallery.css'

@@ -4,7 +4,7 @@ function Policies() {
     return (
         <Container>
             <Row className={"h-50 p-5"} style={{fontWeight: 500, letterSpacing: "0.25em"}}>
-                <h1 style={{fontSize: 88}} className={'my-4'}>
+                <h1 style={{fontSize: 65}} className={'my-4'}>
                     POLICIES
                 </h1>
                 <h3 style={{fontSize: 30}}>

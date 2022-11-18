@@ -9,7 +9,7 @@ function Navigation() {
                 <Navbar.Brand href="/" style={{ fontSize: 25}}>Cold Shoulder Gourmet</Navbar.Brand>
                 <Navbar.Toggle aria-controls="responsive-nbar-nav" />
                 <Navbar.Collapse id="responsive-navbar-nav"  className="px-5 font-weight-bold text-light">
-                    <Nav className="ms-auto">
+                    <Nav className="ms-auto" style={{ fontSize: 20}}>
                         <NavLink className={"navLink"} to="/">Home</NavLink>
                         <NavLink className={"mx-2 navLink"}  to="/menu">Menu</NavLink>
                         <NavLink className={"mx-2 navLink"}  to="/producers">Producers</NavLink>

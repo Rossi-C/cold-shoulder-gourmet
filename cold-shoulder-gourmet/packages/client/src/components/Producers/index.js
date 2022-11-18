@@ -7,7 +7,7 @@ function Producers() {
     return (
         <Container>
             <Row className={"h-50 p-5 text-center"} style={{fontWeight: 500, letterSpacing: "0.25em"}}>
-                <h1 style={{fontSize: 88}}>
+                <h1 style={{fontSize: 65}}>
                     OUR PARTNERS
                 </h1>
                 <h3 style={{fontSize: 30}}>

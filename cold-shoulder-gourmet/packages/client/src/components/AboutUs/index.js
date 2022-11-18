@@ -5,8 +5,8 @@ import {Parallax} from "react-parallax";
 function AboutUs() {
     return (
         <Container fluid>
-            <Parallax className={"text-center py-4"} bgImageStyle={{opacity: 0.5}} bgImage={background} bgImageAlt="the cat" strength={0}>
-                <Container className={'bg-dark my-2'}>
+            <Parallax className={"text-center py-5"} bgImageStyle={{opacity: 0.5}} bgImage={background} bgImageAlt="the cat" strength={0}>
+                <Container className={'bg-dark my-5'}>
                     <Col>
                         <Row className={"h-50 p-5 text-center"} style={{fontWeight: 500, letterSpacing: "0.25em"}}>
                             <h1 style={{fontSize: 88}}>

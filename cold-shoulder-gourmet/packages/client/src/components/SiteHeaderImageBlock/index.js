@@ -6,11 +6,10 @@ function SiteHeaderImageBlock({image, strength, address}) {
    return (
        <Row className={""} style={{fontFamily: "Oswald"}}>
            <Parallax className={"text-center"} bgImageStyle={{opacity: 0.5}} bgImage={image} bgImageAlt="the cat" strength={strength}>
-               <Col className={'image-children'}>
+               <Col className={'image-children py-4'}>
                    <Col>
-                       <Row  className={'p-5 m-5 w-50 m-auto font-weight-bold'}>
-
-                           <h1 style={{ fontSize: 88}}>
+                       <Row  className={'w-50 m-auto font-weight-bold'}>
+                           <h1 style={{ fontSize: 60}}>
                                WELCOME TO COLD SHOULDER
                            </h1>
                            <h3 style={{fontSize: 40}}>

@@ -16,12 +16,11 @@ function Home({soldOut, address, hours, phone, loading, igKey}) {
                         strength={-400}
                         address={address}
                     />
-
                     <Row className={"h-50 py-1 px-5"}>
                         <Col>
                             <Container>
-                                <Row className={"h-50 p-5 text-center"} style={{fontWeight: 500, letterSpacing: "0.25em"}}>
-                                    <h1 style={{fontSize: 88}}>
+                                <Row className={"h-50 py-5 text-center"} style={{fontWeight: 500, letterSpacing: "0.25em"}}>
+                                    <h1 style={{fontSize: 45}}>
                                         ABOUT THESE BADASS SANDWICHES
                                     </h1>
                                 </Row>
