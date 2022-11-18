@@ -67,7 +67,6 @@ function App() {
     return (
         <Container className="bg-black px-0 py-2 m-0" style={{ minHeight: "100vh", fontFamily: "Oswald" }} fluid>
             <div className="text-light">
-
                 <BrowserRouter>
                     {
                         loading &&
