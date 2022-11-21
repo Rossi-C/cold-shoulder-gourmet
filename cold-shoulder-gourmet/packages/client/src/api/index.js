@@ -30,8 +30,8 @@ export const updateNewsLetter = async (email) => {
 }
 
 export const getIG = async () => {
-    const response = await fetch('http://localhost:4000/env');
-    const {key} = await response.json();
+    const response = await fetch('/env');
+    const { key } = await response.json();
     return key
 }
 

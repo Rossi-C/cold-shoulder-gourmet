@@ -130,10 +130,10 @@ function Admin({soldOut, address, hours, winterMenu, loading}) {
                             </Spinner>
                         </Row>
                     }
-                    <Row className="justify-center-md-content my-5">
+                    <Row className="my-5">
                         <Button
                             style={{ color: 'white', borderWidth: 1, borderColor: 'white' }}
-                            className="mx-auto"
+                            className="m-auto"
                             as={Col}
                             sm={2}
                             type="button"

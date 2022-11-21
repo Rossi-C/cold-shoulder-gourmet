@@ -17,11 +17,11 @@ function Login({determineIfAdmin}) {
     }
 
     return (
-        <Col className={'p-4'}>
-            <h1 className={'my-5 text-center'}>You must log in to use this page!</h1>
+        <Col className={'p-4 justify-content-center text-center'}>
+            <h1 className={'my-5 '}>You must log in to use this page!</h1>
             <Button
                 style={{color: 'white', borderWidth: 1, borderColor: 'white'}}
-                className={'m-auto'}
+                className={'mx-auto'}
                 onClick={() => googleLogin()}
             >
                 Login With Google  <AiOutlineGoogle style={{fontSize: 30}}/>
