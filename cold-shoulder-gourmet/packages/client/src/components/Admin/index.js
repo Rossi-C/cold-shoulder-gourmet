@@ -63,10 +63,10 @@ function Admin({soldOut, address, hours, winterMenu, loading}) {
     }, [loading])
 
     const convertToBool = (value) => {
-        if(value === 'true'){
+        if(value === 'true' || value === true){
             return true
         }
-        if(value === 'false'){
+        if(value === 'false' || !value){
             return false
         }
     }
@@ -79,7 +79,7 @@ function Admin({soldOut, address, hours, winterMenu, loading}) {
             soldOut,
             hours: localHours,
             address:localAddress,
-            winterMenu,
+            winterMenu: winterMenu,
         })
     };
 
