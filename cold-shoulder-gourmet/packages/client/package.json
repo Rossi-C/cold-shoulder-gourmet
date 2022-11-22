@@ -2,6 +2,7 @@
   "name": "cold-shoulder-gourmet-client",
   "version": "0.1.0",
   "private": true,
+  "homepage": ".",
   "scripts": {
     "dev": "react-scripts start",
     "build": "npm run clean && react-scripts build",
