@@ -3,9 +3,9 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "npx lerna run dev",
-    "start": "npx lerna run start",
-    "build": "npx lerna run build"
+    "dev": "lerna run dev",
+    "start": "lerna run start",
+    "build": "lerna run build"
   },
   "proxy": "http://localhost:4000",
   "dependencies": {
