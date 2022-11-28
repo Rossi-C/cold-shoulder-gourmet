@@ -64,11 +64,11 @@ function Admin({ soldOut, address, hours, winterMenu, loading }) {
         // eslint-disable-next-line
     }, [loading])
 
+
     const updateBusinessInfo = async () => {
         const businessDocRef = doc(db, 'business', 'info')
         let isSoldOut = localSoldOut === 'Out of Stock' ? true : false;
         let isWinterMenu = localWinterMenu === 'Winter' ? true : false;
-        console.log(typeof isSoldOut)
         await updateDoc(businessDocRef, {
             soldOut: isSoldOut,
             hours: localHours,
