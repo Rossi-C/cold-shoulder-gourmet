@@ -38,7 +38,7 @@ function WinterMenu() {
             />
             <MenuItem
                 name={'GOURMET'}
-                description={'(Culatello di Dorman, Black Truffle Cream, Hydroponic Greens, Shaved Parmesan, Truffle Honey)'}
+                description={'(Whole Muscle, Black Truffle Cream, Hydroponic Greens, Shaved Parmesan, Truffle Honey)'}
                 price={13.50}
             />
             <MenuItem
