@@ -60,15 +60,14 @@ function Admin({ soldOut, address, hours, winterMenu, loading }) {
     useEffect(() => {
         gatherData()
         initiateAuth();
-        console.log(typeof localSoldOut)
         // eslint-disable-next-line
     }, [loading])
 
 
     const updateBusinessInfo = async () => {
         const businessDocRef = doc(db, 'business', 'info')
-        let isSoldOut = localSoldOut === 'Out of Stock' ? true : false;
-        let isWinterMenu = localWinterMenu === 'Winter' ? true : false;
+        let isSoldOut = localSoldOut === 'Out of Stock';
+        let isWinterMenu = localWinterMenu === 'Winter';
         await updateDoc(businessDocRef, {
             soldOut: isSoldOut,
             hours: localHours,

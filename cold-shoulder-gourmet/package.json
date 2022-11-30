@@ -4,16 +4,15 @@
   "private": true,
   "scripts": {
     "dev": "lerna run dev",
-    "start:local": "lerna run start",
+    "start:local": "npx cross-env NODE_ENV=dev lerna run start",
     "start": "node packages/server/index.js",
     "build": "lerna run build"
   },
   "proxy": "http://localhost:4000",
   "dependencies": {
+    "@google-cloud/debug-agent": "^7.1.1",
     "jest": "^27.5.1",
     "lerna": "^6.0.3"
-  },
-  "devDependencies": {
   },
   "workspaces": [
     "packages/server",
