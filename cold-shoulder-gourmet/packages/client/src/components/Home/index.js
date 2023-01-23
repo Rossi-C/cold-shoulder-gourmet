@@ -54,10 +54,10 @@ function Home({soldOut, address, hours, phone, loading, igKey}) {
                                 </Row>
                             </Container>
                         </Col>
-                        < hr/>
+                        {/*< hr/>*/}
 
-                            <InstaGrid igKey={igKey}/>
-                        < hr/>
+                        {/*    <InstaGrid igKey={igKey}/>*/}
+                        {/*< hr/>*/}
                     </Row>
 
                     <Info
